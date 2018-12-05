@@ -606,6 +606,18 @@
 
 
 document.addEventListener("DOMContentLoaded", function(event) {
+
+const messages = document.querySelector("#messages")
+
+function displayMessage(message) {
+  messages.innerHTML += `<li>${message}</li>`
+}
+
+fetch("http://localhost:3000/api/v1/messages").then(r => r.json()).then(json => json.forEach(message => displayMessage(message.content)))
+
+
+
+
   const ActionCable = require('actioncable')
 
   let App
@@ -624,10 +636,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
     },
 
     received: function(data) {
-      const messages = document.querySelector("#messages")
-      let newMessage = document.createElement("li")
-      newMessage.innerHTML = data.message
-      messages.appendChild(newMessage)
+
+      debugger
+      displayMessage(data)
+
     },
 
     speak: function(message) {
@@ -643,6 +655,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
     let messageInput = document.querySelector("#message").value
     messageForm.reset()
     App.group.speak(messageInput)
+
+
   })
 
 })

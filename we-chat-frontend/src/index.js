@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     received: function(data) {
       const messages = document.querySelector("#messages")
       let newMessage = document.createElement("li")
-      newMessage.innerHTML = data.message
+      newMessage.innerHTML = data
       messages.appendChild(newMessage)
     },
 
